@@ -26,6 +26,7 @@ We will use the following datasets for this project:
 
 - CNN News Articles: 
 This dataset contains over 9,000 articles from CNN's website. The dataset includes the article text, author, date, category, sub-category, URL, headline, description, keywords, and alternative headline.
+This dataset is downloadable from Kaggle here: https://www.kaggle.com/datasets/hadasu92/cnn-articles
 
 ## Functionalities:
 
