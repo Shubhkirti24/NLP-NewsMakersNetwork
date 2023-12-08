@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Search Result{% endblock %}
+{% block content%}
+<!doctype html>
+<html lang="en">
+<html>
+   <body>
+   <div class="p-4"></div>
+   <h1>Entity Search Result</h1>
+      <table class="table table-hover">
+         <thead>
+            <td>Person</td>
+            <td>Top 10 Comentioned Entity</td>
+         </thead>
+         
+            <tr>
+               <td>{{per_name}}</td>
+               <td>{{top10}}</td>	
+
+            </tr>
+      </table>
+      
+      <a href = "/">Go back to home page</a>
+      
+   </body>
+</html>
+{% endblock %}

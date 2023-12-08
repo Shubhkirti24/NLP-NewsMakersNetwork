@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Network Builder{% endblock %}
+{% block content%}
+<html>
+   <body>
+      <div class="container">
+         <div class="p-4"></div>
+            <form action = "{{ url_for('network') }}" method = "POST">
+            <h3>Enter Newsmaker Name</h3>
+            <p>You can search for a partial name and see a list of available options.</p>
+            Newsmaker Name<br>
+            <input type = "text" name = "fpi" /></br>
+            <p><input type = "submit" value = "submit" /></p>
+         </form>
+      </div>
+   </body>
+</html>
+{% endblock %}

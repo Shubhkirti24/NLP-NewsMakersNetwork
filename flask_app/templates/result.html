@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Search Result{% endblock %}
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>NetworkX Result</title>
+</head>
+<body>
+    <h1>NetworkX Result</h1>
+        <table class="table table-hover">
+            <thead>
+            <td>Result for {{per_name}}</td>
+            </thead>
+            <tr>
+                <td>Average Sentiment in Articles</td>
+                <td>{{sent_ave}}</td>
+            <tr>
+                <td>Top 10 Related Entities</td>
+                <td>{{ent_10}}</td>
+            </tr>
+        </table>
+    <a href="/">Back to search</a>
+</body>
+</html>
+{% endblock %}
