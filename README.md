@@ -49,3 +49,14 @@ We are currently in the early stages of development for this project. We are pla
 3. Article sentiment analysis
 4. Graph generation
 5. Data Visualisation
+
+---
+
+## Final Implementation:
+
+![Network X Graph representing nodes ,co-mentions and sentiments](https://github.iu.edu/shubpras/Fall-2023--NLP-Group-3/blob/main/Screenshot%202023-12-10%20201446.png)
+
+---
+
+![Intial implementation](https://github.iu.edu/shubpras/Fall-2023--NLP-Group-3/blob/main/Screenshot%202023-12-10%20192951.png)
+
