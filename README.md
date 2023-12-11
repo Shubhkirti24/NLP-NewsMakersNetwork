@@ -3,7 +3,7 @@
 
 # Project Title: News Makers Network
 
-## Team: Glen Colletti, Peter Stewart, Shubkirti Prasad
+## Team: Glen Colletti, Peter Stewart, Shubhkirti Prasad
 
 ---
 ### Web app link : http://peeves.pythonanywhere.com/network
