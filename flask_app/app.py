@@ -1,6 +1,5 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify
 import pandas as pd
-from flask_debugtoolbar import DebugToolbarExtension
 import os
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -10,6 +9,7 @@ import matplotlib.colors as mcolors
 import plotly.offline as py
 import plotly.graph_objects as go
 import plotly.io as pio
+from plotly.offline import plot
 
 app = Flask(__name__)
 
@@ -25,6 +25,19 @@ def network():
 def about():
     return render_template('about.html', content= "about this site")
 
+@app.route('/search', methods=['POST', 'GET'])
+def search():
+    csv_path = os.path.join(app.root_path, 'static', 'co_sent.csv')
+    entity_df = pd.read_csv(csv_path)
+    query = request.form.get('pr').lower()
+
+    # Filter data based on the query (case-insensitive partial match)
+    matches = [item for item in entity_df['Name1'].unique().astype(str) if query in item.lower()]
+
+    # Return the matches as JSON
+    return render_template('search_result.html', query=query, matches=matches[:5])
+    return jsonify(matches[:5])
+
 @app.route('/entityrec',methods = ['POST', 'GET'])
 def entityrec():
     if request.method == 'POST':
@@ -32,7 +45,7 @@ def entityrec():
         csv_path3 = os.path.join(app.root_path, 'static', 'related_entites.csv')
         entity_df = pd.read_csv(csv_path)
         related_df = pd.read_csv(csv_path3)
-        pr = request.form['pr']
+        pr = request.form['person']
         result = entity_df[entity_df['Name1'].str.contains(pr, case=False, na=False)]
         per_name = result.iloc[0]['Name1']
         result3 = related_df[related_df['Person'].str.contains(pr, case=False, na=False)]
@@ -83,7 +96,7 @@ def entityrec():
             x0, y0 = pos[edge[0]]
             x1, y1 = pos[edge[1]]
             text = f'{edge[0]} -- {edge[1]}: Co-mentions: {newsmakers.edges()[edge]["weight"]}'
-            trace = make_edge([x0, x1, None], [y0, y1, None], text, 10 * newsmakers.edges()[edge]['weight']**1)
+            trace = make_edge([x0, x1, None], [y0, y1, None], text, 15 * newsmakers.edges()[edge]['weight']+1)
             edge_trace.append(trace)
             
         node_trace = go.Scatter(x=[], y=[], text=[], textposition="top center", textfont_size=10, mode='markers+text',
@@ -108,17 +121,12 @@ def entityrec():
         fig.add_trace(node_trace)
 
         # Update layout settings
-        fig.update_layout(showlegend=False, xaxis_showgrid=False, yaxis_showgrid=False, xaxis_zeroline=False, yaxis_zeroline=False)
+        fig.update_layout(showlegend=False, xaxis_showgrid=False, yaxis_showgrid=False, xaxis_zeroline=False, yaxis_zeroline=False, width=1000, height=1000)
         fig.update_xaxes(showticklabels=False)
         fig.update_yaxes(showticklabels=False)
         
-        img_data = fig.show()
-    return render_template('result.html', img_data=img_data, ent_10=ent_10, per_name=per_name, sent_ave=sent_ave)
+        # img_data = fig.show()
+        # Convert the Plotly figure to HTML
+        plot_div = plot(fig, output_type='div', include_plotlyjs=False)
+    return render_template('result.html', plot_div=plot_div, ent_10=ent_10, per_name=per_name, sent_ave=sent_ave)
     # return send_file(img, mimetype='image/png')
-
-    
-app.debug = False
-toolbar = DebugToolbarExtension(app)
-#app.debug = True
-if __name__ == "__main__":
-    app.run(debug=True)
