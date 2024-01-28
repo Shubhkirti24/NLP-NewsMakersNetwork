@@ -59,5 +59,5 @@ We are currently in the early stages of development for this project. We are pla
 
 ---
 
-![Intial implementation]([https://github.iu.edu/shubpras/Fall-2023--NLP-Group-3/blob/main/Screenshot%202023-12-10%20192951.png](https://github.com/Shubhkirti24/NLP-NewsMakersNetwork/blob/main/Screenshot%202023-12-10%20192951.png)https://github.com/Shubhkirti24/NLP-NewsMakersNetwork/blob/main/Screenshot%202023-12-10%20192951.png)
+![Intial implementation](https://github.com/Shubhkirti24/NLP-NewsMakersNetwork/blob/main/Screenshot%202023-12-10%20192951.png)
 
